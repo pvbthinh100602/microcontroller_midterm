@@ -12,8 +12,9 @@
 
 #define INIT 1
 #define SIMPLE_PRESSED 2
-#define LONG_PRESSED 3
-#define NO_PRESSED 4
+#define LONG_INC 3
+#define LONG_DEC 4
+//#define NO_PRESSED 4
 
 
 extern int status;

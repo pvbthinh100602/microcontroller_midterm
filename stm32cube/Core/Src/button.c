@@ -62,6 +62,7 @@ void button_reading(){
 					button_state[i] = BUTTON_IS_LONG_PRESSED;
 					counter_for_button_pressed[i] = 0;
 					button_long_flag[i] = 1;
+					button_flag[i] = 1;
 				}
 				if(button_buffer[i] == RELEASED_STATE){
 					button_state[i] = BUTTON_IS_RELEASED;
@@ -77,11 +78,12 @@ void button_reading(){
 			case BUTTON_IS_LONG_PRESSED:
 				counter_for_button_pressed[i]++;
 				if(counter_for_button_pressed[i] == TIME_OUT_FOR_KEY_PRESSED/TIMER_CYCLE){
-					button_long_flag[i] = 1;
+					button_flag[i] = 1;
 					counter_for_button_pressed[i] = 0;
 				}
 				if(button_buffer[i] == RELEASED_STATE){
 					button_state[i] = BUTTON_IS_RELEASED;
+					button_long_flag[i] = 0;
 					counter_for_button_pressed[i] = 0;
 				}
 				break;

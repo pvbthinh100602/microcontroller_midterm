@@ -101,10 +101,7 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	  fsm_simple_button_run();
-	  if(timer1_flag){
-		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-		  setTimer1(500);
-	  }
+	  fsm_long_pressed_button_run();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

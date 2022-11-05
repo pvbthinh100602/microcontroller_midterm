@@ -12,5 +12,6 @@
 #include "display.h"
 
 void fsm_simple_button_run(void);
+void fsm_long_pressed_button_run(void);
 
 #endif /* INC_FSM_H_ */

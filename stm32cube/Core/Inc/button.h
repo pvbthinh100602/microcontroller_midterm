@@ -23,7 +23,7 @@
 #define BUTTON_IS_LONG_PRESSED 13
 
 void button_reading();
-void button_process(int);
 int isButtonPressed(int);
+int isButtonLongPressed(int);
 
 #endif /* INC_BUTTON_H_ */

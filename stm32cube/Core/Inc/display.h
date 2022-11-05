@@ -8,9 +8,11 @@
 #ifndef INC_DISPLAY_H_
 #define INC_DISPLAY_H_
 
-#include "timer.h"
 #include "main.h"
+#include "global.h"
 
-void display7SEG(int);
+void increase7SEG(void);
+void decrease7SEG(void);
+void display7SEG(void);
 
 #endif /* INC_DISPLAY_H_ */
