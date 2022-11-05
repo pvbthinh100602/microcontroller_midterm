@@ -17,6 +17,7 @@ static int button_state[NO_OF_BUTTONS] = {BUTTON_IS_RELEASED, BUTTON_IS_RELEASED
 static int counter_for_button_pressed[NO_OF_BUTTONS];
 
 static int button_flag[NO_OF_BUTTONS];
+static int button_long_flag[NO_OF_BUTTONS];
 
 int isButtonPressed(int index){
 	if(button_flag[index] == 1){
@@ -26,10 +27,8 @@ int isButtonPressed(int index){
 	return 0;
 }
 
-void button_process(int index){
-	if(index >= 0 && index < NO_OF_BUTTONS){
-		button_flag[index] = 1;
-	}
+int isButtonLongPressed(int index){
+	return button_long_flag[index];
 }
 
 void button_reading(){
@@ -40,30 +39,29 @@ void button_reading(){
 		uint16_t button_pin = 0;
 		switch(i){
 		case 0:
-			button_pin = BUTTON0_Pin;
+			button_pin = RESET_Pin;
 			break;
 		case 1:
-			button_pin = BUTTON1_Pin;
+			button_pin = INC_Pin;
 			break;
 		case 2:
-			button_pin = BUTTON2_Pin;
+			button_pin = DEC_Pin;
 			break;
 		default:
 			break;
 		}
 		debounce_buffer1[i] = HAL_GPIO_ReadPin(GPIOA, button_pin);
-        process after debouncing
+        // process after debouncing
 		if((debounce_buffer3[i] == debounce_buffer2[i]) && debounce_buffer2[i] == debounce_buffer1[i]){
 			button_buffer[i] = debounce_buffer3[i];
 			// fsm for processing button
 			switch(button_state[i]){
 			case BUTTON_IS_PRESSED:
-		        //waiting for a period if the button is pressed in a duration
 				counter_for_button_pressed[i]++;
 				if(counter_for_button_pressed[i] == WAITING_TIME/TIMER_CYCLE){
-					button_state[i] = BUTTON_IS_PRESSED_IN_PERIOD;
+					button_state[i] = BUTTON_IS_LONG_PRESSED;
 					counter_for_button_pressed[i] = 0;
-					button_process(i);
+					button_long_flag[i] = 1;
 				}
 				if(button_buffer[i] == RELEASED_STATE){
 					button_state[i] = BUTTON_IS_RELEASED;
@@ -73,14 +71,13 @@ void button_reading(){
 			case BUTTON_IS_RELEASED:
 				if(button_buffer[i] == PRESSED_STATE){
 					button_state[i] = BUTTON_IS_PRESSED;
-					button_process(i);
+					button_flag[i] = 1;
 				}
 				break;
-			case BUTTON_IS_PRESSED_IN_PERIOD:
-	            //if the button continues being pressed in duration, the button only triggered in a period defined previous.
+			case BUTTON_IS_LONG_PRESSED:
 				counter_for_button_pressed[i]++;
 				if(counter_for_button_pressed[i] == TIME_OUT_FOR_KEY_PRESSED/TIMER_CYCLE){
-					button_process(i);
+					button_long_flag[i] = 1;
 					counter_for_button_pressed[i] = 0;
 				}
 				if(button_buffer[i] == RELEASED_STATE){
