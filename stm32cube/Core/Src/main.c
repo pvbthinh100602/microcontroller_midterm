@@ -102,6 +102,7 @@ int main(void)
     /* USER CODE END WHILE */
 	  fsm_simple_button_run();
 	  fsm_long_pressed_button_run();
+	  fsm_no_pressed_button_run();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

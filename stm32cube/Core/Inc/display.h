@@ -11,8 +11,10 @@
 #include "main.h"
 #include "global.h"
 
+void reset7SEG(void);
 void increase7SEG(void);
 void decrease7SEG(void);
 void display7SEG(void);
+void toggleRed(void);
 
 #endif /* INC_DISPLAY_H_ */

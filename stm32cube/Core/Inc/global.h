@@ -11,10 +11,10 @@
 #include "timer.h"
 
 #define INIT 1
-#define SIMPLE_PRESSED 2
+#define NOR_PRESSED 2
 #define LONG_INC 3
 #define LONG_DEC 4
-//#define NO_PRESSED 4
+#define AUTO_DEC 5
 
 
 extern int status;

@@ -1,3 +1,5 @@
 display.c:10:6:display7SEG	8	static
 display.c:56:6:increase7SEG	8	static
 display.c:62:6:decrease7SEG	8	static
+display.c:68:6:reset7SEG	8	static
+display.c:73:6:toggleRed	8	static

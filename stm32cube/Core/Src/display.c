@@ -64,3 +64,12 @@ void decrease7SEG(void){
 	if(counter < 0) counter = 9;
 	display7SEG();
 }
+
+void reset7SEG(void){
+	counter = 0;
+	display7SEG();
+}
+
+void toggleRed(void){
+	HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+}
